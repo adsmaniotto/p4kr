@@ -1,26 +1,16 @@
-
-# coding: utf-8
-
-# In[196]:
+import requests, bs4
+import datetime
 
 # Navigate to Pitchfork and pull the URLs for today's featured reviews
-import requests, bs4
-res = requests.get('http://www.pitchfork.com')
+prefix = "http://www.pitchfork.com"
+res = requests.get(prefix)
 res.raise_for_status()
 soup = bs4.BeautifulSoup(res.text, "lxml")
-
-
-# In[197]:
 
 # Pull the div in the HTML code that contains all the album review info
 album_details = soup.select('.album-details')
 
-
-# In[198]:
-
 # Step through each of the featured reviews, extract info, and print to console
-
-import datetime
 
 print("Pitchfork Reviews for " + str(datetime.date.today()))
 print("I read Pitchfork reviews every morning so you don't have to.")
@@ -54,8 +44,6 @@ for element in album_details[0:5]:
     print(prefix + element.a.get("href"))
     print('\n')
 
-
-# In[24]:
 
 # Ideas for future code that I will write locally so I'm not sharing my Gmail password on GitHub :)
 # Email the daily summary to yourself
